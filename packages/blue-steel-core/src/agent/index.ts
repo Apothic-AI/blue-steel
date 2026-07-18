@@ -42,10 +42,15 @@ const DEFAULT_CONFIG: Required<Omit<AgentOptions, 'actions'> & { actions: Action
     actions: [...taskActions], // Default to taskActions; other actions come from connectors
     connectors: [],
     llm: {
-        provider: 'google-ai',
+        provider: 'openai-responses',
         options: {
-            model: 'gemini-2.5-pro-preview-05-06',
-            apiKey: process.env.GOOGLE_API_KEY || "YOUR_GOOGLE_API_KEY"
+            model: process.env.OPENAI_MODEL || process.env.BLUE_STEEL_OPENAI_MODEL || 'gpt-4.1',
+            apiKey: process.env.OPENAI_API_KEY || process.env.BLUE_STEEL_OPENAI_API_KEY,
+            baseUrl:
+                process.env.OPENAI_BASE_URL ||
+                process.env.BLUE_STEEL_OPENAI_BASE_URL ||
+                process.env.OPENAI_API_BASE ||
+                'https://api.openai.com/v1',
         }
     } as LLMClient,
     prompt: null,

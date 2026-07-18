@@ -62,9 +62,13 @@ export class ModelHarness {
         this.collector = new Collector("macro");
         this.cr = new ClientRegistry();
         let bamlClientOptions = await convertToBamlClientOptions(this.options.llm);
+        const bamlProvider =
+            this.options.llm.provider === 'claude-code'
+                ? 'anthropic'
+                : this.options.llm.provider;
         this.cr.addLlmClient(
-            'Magnus', 
-            this.options.llm.provider === 'claude-code' ? 'anthropic' : this.options.llm.provider,
+            'Magnus',
+            bamlProvider,
             bamlClientOptions,
             'DefaultRetryPolicy'
         );

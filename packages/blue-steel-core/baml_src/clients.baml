@@ -65,6 +65,18 @@ client<llm> GPT {
     }
 }
 
+// Default-style OpenAI-compatible Responses API (any endpoint exposing /v1/responses)
+client<llm> OpenAIResponses {
+    provider "openai-responses"
+    retry_policy Exponential
+    options {
+        base_url env.OPENAI_BASE_URL
+        api_key env.OPENAI_API_KEY
+        model "gpt-4.1"
+        temperature 0.0
+    }
+}
+
 // client<llm> Macro {
 //     provider openai
 //     options {

@@ -84,6 +84,17 @@ export async function convertToBamlClientOptions(client: LLMClient): Promise<Rec
             api_key: client.options.apiKey,
             model: client.options.model,
             temperature: temp,
+            base_url: client.options.baseUrl,
+            headers: client.options.headers,
+        };
+    } else if (client.provider === 'openai-responses') {
+        options = {
+            api_key: client.options.apiKey,
+            model: client.options.model,
+            temperature: temp,
+            base_url: client.options.baseUrl,
+            headers: client.options.headers,
+            reasoning: client.options.reasoning,
         };
     } else if (client.provider === 'openai-generic') {
         options = {
@@ -92,8 +103,8 @@ export async function convertToBamlClientOptions(client: LLMClient): Promise<Rec
             model: client.options.model,
             temperature: temp,
             headers: {
-                "HTTP-Referer": "https://blue-steel.run",
-                "X-Title": "BlueSteel",
+                "HTTP-Referer": "https://github.com/Apothic-AI/blue-steel",
+                "X-Title": "Blue Steel",
                 ...client.options.headers
             }
         };
@@ -110,24 +121,57 @@ export async function convertToBamlClientOptions(client: LLMClient): Promise<Rec
     return cleanNestedObject(options);
 }
 
+function envFirst(...keys: string[]): string | undefined {
+    for (const key of keys) {
+        const value = process.env[key];
+        if (value !== undefined && value !== '') return value;
+    }
+    return undefined;
+}
 
+/**
+ * Default LLM: OpenAI-compatible Responses API.
+ *
+ * Env (first match wins per field):
+ * - Base URL: BLUE_STEEL_OPENAI_BASE_URL | OPENAI_BASE_URL | OPENAI_API_BASE
+ * - API key:  BLUE_STEEL_OPENAI_API_KEY | OPENAI_API_KEY
+ * - Model:    BLUE_STEEL_OPENAI_MODEL | OPENAI_MODEL
+ *
+ * Falls back to Anthropic if only ANTHROPIC_API_KEY is set.
+ */
 export function tryDeriveUIGroundedClient(): LLMClient | null {
+    const baseUrl = envFirst(
+        'BLUE_STEEL_OPENAI_BASE_URL',
+        'OPENAI_BASE_URL',
+        'OPENAI_API_BASE',
+    );
+    const apiKey = envFirst('BLUE_STEEL_OPENAI_API_KEY', 'OPENAI_API_KEY');
+    const model = envFirst('BLUE_STEEL_OPENAI_MODEL', 'OPENAI_MODEL')
+        ?? 'gpt-4.1';
+
+    // Prefer Responses API whenever a key or custom endpoint is configured
+    if (apiKey || baseUrl) {
+        return {
+            provider: 'openai-responses',
+            options: {
+                model,
+                apiKey,
+                baseUrl: baseUrl ?? 'https://api.openai.com/v1',
+            },
+        };
+    }
+
     if (process.env.ANTHROPIC_API_KEY) {
         return {
             provider: 'anthropic',
             options: {
-                // TODO: do more testing on best claude model for visuals
-                // model: 'claude-3-5-sonnet-20240620', // <- definitely not, pre computer use
-                // model: 'claude-3-5-sonnet-20241022', // <- not great on rescaling res
-                //model: 'claude-3-7-sonnet-latest', // <- underplans
-                // model: 'claude-sonnet-4-20250514', // <- underplans, also supposedly worse at visual reasoning
-                model: 'claude-haiku-4-5-20251001', // <- fast, cost-effective, good performance
-                apiKey: process.env.ANTHROPIC_API_KEY
-            }
-        }
-    } else {
-        return null;
+                model: 'claude-haiku-4-5-20251001',
+                apiKey: process.env.ANTHROPIC_API_KEY,
+            },
+        };
     }
+
+    return null;
 }
 
 
@@ -154,7 +198,11 @@ export function buildDefaultBrowserAgentOptions(
     let llms: LLMClient[] = agentOptions.llm ? (Array.isArray(agentOptions.llm) ? agentOptions.llm : [agentOptions.llm]) : (envLlm ? [envLlm] : []);
 
     if (llms.length == 0) {
-        throw new Error("No LLM configured or available from environment. Set environment variable ANTHROPIC_API_KEY and try again. See https://docs.blue-steel.run/customizing/llm-configuration for details");
+        throw new Error(
+            "No LLM configured. Set OPENAI_API_KEY (and optionally OPENAI_BASE_URL / OPENAI_MODEL) " +
+            "for an OpenAI-compatible Responses API, or pass llm: { provider: 'openai-responses', options: { ... } }. " +
+            "ANTHROPIC_API_KEY is also supported as a fallback."
+        );
     }
 
     // Set reasonable temp if not provided

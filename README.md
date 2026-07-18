@@ -95,12 +95,33 @@ bun run bootstrap-skill
 bun run build
 ```
 
-### 4. Configure a model
+### 4. Configure a model (OpenAI-compatible Responses API)
+
+Blue Steel defaults to BAML’s **`openai-responses`** provider (`POST {baseUrl}/responses`).
 
 ```bash
-export ANTHROPIC_API_KEY=sk-ant-...
-# or other providers supported by the agent harness — see packages/blue-steel-core
+export OPENAI_API_KEY=sk-...
+# optional — any OpenAI-compatible Responses endpoint:
+export OPENAI_BASE_URL=https://api.openai.com/v1
+export OPENAI_MODEL=gpt-4.1
 ```
+
+Or pass explicitly:
+
+```ts
+await startBrowserAgent({
+  llm: {
+    provider: 'openai-responses',
+    options: {
+      model: 'gpt-4.1',
+      apiKey: process.env.OPENAI_API_KEY,
+      baseUrl: 'https://your-proxy.example/v1',
+    },
+  },
+});
+```
+
+`ANTHROPIC_API_KEY` still works as a fallback when no OpenAI env is set.
 
 ### 5. Smoke-test the browser (no LLM)
 
@@ -146,12 +167,15 @@ Default profile: `~/.camoufox/profiles/blue-steel` (isolated from other Camoufox
 
 | Variable | Purpose |
 |----------|---------|
+| `OPENAI_API_KEY` / `BLUE_STEEL_OPENAI_API_KEY` | API key for Responses endpoint |
+| `OPENAI_BASE_URL` / `BLUE_STEEL_OPENAI_BASE_URL` / `OPENAI_API_BASE` | Base URL (default `https://api.openai.com/v1`) |
+| `OPENAI_MODEL` / `BLUE_STEEL_OPENAI_MODEL` | Model id (default `gpt-4.1`) |
+| `ANTHROPIC_API_KEY` | Fallback LLM if no OpenAI env is set |
 | `BLUE_STEEL_SKILL_DIR` | Override skill root (default: `./skill` or `~/.agents/skills/blue-steel`) |
 | `BLUE_STEEL_PYTHON` | Python binary with Camoufox deps |
 | `BLUE_STEEL_PROFILE_NAME` | Firefox profile name (default `blue-steel`) |
 | `BLUE_STEEL_HEADLESS` | `1` for headless smoke/CI |
 | `BLUE_STEEL_NARRATE` | Log agent actions to the console |
-| `ANTHROPIC_API_KEY` / etc. | LLM credentials |
 
 ## Skill protocol (highlights)
 

@@ -7,7 +7,7 @@ export type BrowserAgentRole= 'act' | 'extract' | 'query';
 export const allBrowserAgentRoles: BrowserAgentRole[] = ['act', 'extract', 'query'] as const;
 
 // Approximately mirrors https://docs.boundaryml.com/ref/llm-client-providers
-export type LLMClient = (AnthropicClient | ClaudeCodeClient | BedrockClient | GoogleAIClient | GoogleVertexClient | OpenAIClient | OpenAIGenericClient | AzureOpenAIClient) &
+export type LLMClient = (AnthropicClient | ClaudeCodeClient | BedrockClient | GoogleAIClient | GoogleVertexClient | OpenAIClient | OpenAIResponsesClient | OpenAIGenericClient | AzureOpenAIClient) &
     { roles?: BrowserAgentRole[] };
 
 export interface AnthropicClient {
@@ -73,7 +73,24 @@ export interface OpenAIClient {
     options: {
         model: string,
         apiKey?: string,
-        temperature?: number
+        temperature?: number,
+        baseUrl?: string,
+        headers?: Record<string, string>,
+    }
+}
+
+/** OpenAI /responses endpoint (and compatible proxies). Prefer this over chat completions. */
+export interface OpenAIResponsesClient {
+    provider: 'openai-responses',
+    options: {
+        model: string,
+        apiKey?: string,
+        temperature?: number,
+        /** Defaults to https://api.openai.com/v1 */
+        baseUrl?: string,
+        headers?: Record<string, string>,
+        /** Passed through to Responses API when supported */
+        reasoning?: { effort?: string },
     }
 }
 
