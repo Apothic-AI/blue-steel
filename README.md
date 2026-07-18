@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/logo.png" alt="Blue Steel" width="192" />
+  <img src="https://raw.githubusercontent.com/Apothic-AI/blue-steel/main/assets/logo.png" alt="Blue Steel" width="192" />
   <h1>Blue Steel</h1>
   <p><strong>Vision browser agent</strong> powered by Camoufox stealth Firefox</p>
   <p>
