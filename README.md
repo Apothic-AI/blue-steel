@@ -121,7 +121,7 @@ await startBrowserAgent({
 });
 ```
 
-`ANTHROPIC_API_KEY` still works as a fallback when no OpenAI env is set.
+
 
 ### 5. Smoke-test the browser (no LLM)
 
@@ -170,7 +170,6 @@ Default profile: `~/.camoufox/profiles/blue-steel` (isolated from other Camoufox
 | `OPENAI_API_KEY` / `BLUE_STEEL_OPENAI_API_KEY` | API key for Responses endpoint |
 | `OPENAI_BASE_URL` / `BLUE_STEEL_OPENAI_BASE_URL` / `OPENAI_API_BASE` | Base URL (default `https://api.openai.com/v1`) |
 | `OPENAI_MODEL` / `BLUE_STEEL_OPENAI_MODEL` | Model id (default `gpt-4.1`) |
-| `ANTHROPIC_API_KEY` | Fallback LLM if no OpenAI env is set |
 | `BLUE_STEEL_SKILL_DIR` | Override skill root (default: `./skill` or `~/.agents/skills/blue-steel`) |
 | `BLUE_STEEL_PYTHON` | Python binary with Camoufox deps |
 | `BLUE_STEEL_PROFILE_NAME` | Firefox profile name (default `blue-steel`) |

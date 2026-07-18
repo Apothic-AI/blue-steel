@@ -130,14 +130,12 @@ function envFirst(...keys: string[]): string | undefined {
 }
 
 /**
- * Default LLM: OpenAI-compatible Responses API.
+ * Default LLM: OpenAI-compatible Responses API only.
  *
  * Env (first match wins per field):
  * - Base URL: BLUE_STEEL_OPENAI_BASE_URL | OPENAI_BASE_URL | OPENAI_API_BASE
  * - API key:  BLUE_STEEL_OPENAI_API_KEY | OPENAI_API_KEY
  * - Model:    BLUE_STEEL_OPENAI_MODEL | OPENAI_MODEL
- *
- * Falls back to Anthropic if only ANTHROPIC_API_KEY is set.
  */
 export function tryDeriveUIGroundedClient(): LLMClient | null {
     const baseUrl = envFirst(
@@ -149,7 +147,6 @@ export function tryDeriveUIGroundedClient(): LLMClient | null {
     const model = envFirst('BLUE_STEEL_OPENAI_MODEL', 'OPENAI_MODEL')
         ?? 'gpt-4.1';
 
-    // Prefer Responses API whenever a key or custom endpoint is configured
     if (apiKey || baseUrl) {
         return {
             provider: 'openai-responses',
@@ -157,16 +154,6 @@ export function tryDeriveUIGroundedClient(): LLMClient | null {
                 model,
                 apiKey,
                 baseUrl: baseUrl ?? 'https://api.openai.com/v1',
-            },
-        };
-    }
-
-    if (process.env.ANTHROPIC_API_KEY) {
-        return {
-            provider: 'anthropic',
-            options: {
-                model: 'claude-haiku-4-5-20251001',
-                apiKey: process.env.ANTHROPIC_API_KEY,
             },
         };
     }
@@ -200,8 +187,7 @@ export function buildDefaultBrowserAgentOptions(
     if (llms.length == 0) {
         throw new Error(
             "No LLM configured. Set OPENAI_API_KEY (and optionally OPENAI_BASE_URL / OPENAI_MODEL) " +
-            "for an OpenAI-compatible Responses API, or pass llm: { provider: 'openai-responses', options: { ... } }. " +
-            "ANTHROPIC_API_KEY is also supported as a fallback."
+            "for an OpenAI-compatible Responses API, or pass llm: { provider: 'openai-responses', options: { ... } }."
         );
     }
 
