@@ -72,8 +72,11 @@ client<llm> OpenAIResponses {
     options {
         base_url env.OPENAI_BASE_URL
         api_key env.OPENAI_API_KEY
-        model "gpt-4.1"
+        model "gpt-5.6-terra"
         temperature 0.0
+        reasoning {
+            effort "high"
+        }
     }
 }
 

@@ -44,13 +44,19 @@ const DEFAULT_CONFIG: Required<Omit<AgentOptions, 'actions'> & { actions: Action
     llm: {
         provider: 'openai-responses',
         options: {
-            model: process.env.OPENAI_MODEL || process.env.BLUE_STEEL_OPENAI_MODEL || 'gpt-4.1',
+            model: process.env.OPENAI_MODEL || process.env.BLUE_STEEL_OPENAI_MODEL || 'gpt-5.6-terra',
             apiKey: process.env.OPENAI_API_KEY || process.env.BLUE_STEEL_OPENAI_API_KEY,
             baseUrl:
                 process.env.OPENAI_BASE_URL ||
                 process.env.BLUE_STEEL_OPENAI_BASE_URL ||
                 process.env.OPENAI_API_BASE ||
                 'https://api.openai.com/v1',
+            reasoning: {
+                effort:
+                    process.env.OPENAI_REASONING ||
+                    process.env.BLUE_STEEL_OPENAI_REASONING ||
+                    'high',
+            },
         }
     } as LLMClient,
     prompt: null,

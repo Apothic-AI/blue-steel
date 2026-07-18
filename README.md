@@ -103,7 +103,8 @@ Blue Steel defaults to BAML’s **`openai-responses`** provider (`POST {baseUrl}
 export OPENAI_API_KEY=sk-...
 # optional — any OpenAI-compatible Responses endpoint:
 export OPENAI_BASE_URL=https://api.openai.com/v1
-export OPENAI_MODEL=gpt-4.1
+export OPENAI_MODEL=gpt-5.6-terra          # default
+export OPENAI_REASONING=high              # default reasoning effort
 ```
 
 Or pass explicitly:
@@ -113,9 +114,10 @@ await startBrowserAgent({
   llm: {
     provider: 'openai-responses',
     options: {
-      model: 'gpt-4.1',
+      model: 'gpt-5.6-terra',
       apiKey: process.env.OPENAI_API_KEY,
       baseUrl: 'https://your-proxy.example/v1',
+      reasoning: { effort: 'high' },
     },
   },
 });
@@ -169,7 +171,8 @@ Default profile: `~/.camoufox/profiles/blue-steel` (isolated from other Camoufox
 |----------|---------|
 | `OPENAI_API_KEY` / `BLUE_STEEL_OPENAI_API_KEY` | API key for Responses endpoint |
 | `OPENAI_BASE_URL` / `BLUE_STEEL_OPENAI_BASE_URL` / `OPENAI_API_BASE` | Base URL (default `https://api.openai.com/v1`) |
-| `OPENAI_MODEL` / `BLUE_STEEL_OPENAI_MODEL` | Model id (default `gpt-4.1`) |
+| `OPENAI_MODEL` / `BLUE_STEEL_OPENAI_MODEL` | Model id (default `gpt-5.6-terra`) |
+| `OPENAI_REASONING` / `BLUE_STEEL_OPENAI_REASONING` | Responses reasoning effort (default `high`) |
 | `BLUE_STEEL_SKILL_DIR` | Override skill root (default: `./skill` or `~/.agents/skills/blue-steel`) |
 | `BLUE_STEEL_PYTHON` | Python binary with Camoufox deps |
 | `BLUE_STEEL_PROFILE_NAME` | Firefox profile name (default `blue-steel`) |

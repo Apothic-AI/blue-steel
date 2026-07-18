@@ -145,7 +145,9 @@ export function tryDeriveUIGroundedClient(): LLMClient | null {
     );
     const apiKey = envFirst('BLUE_STEEL_OPENAI_API_KEY', 'OPENAI_API_KEY');
     const model = envFirst('BLUE_STEEL_OPENAI_MODEL', 'OPENAI_MODEL')
-        ?? 'gpt-4.1';
+        ?? 'gpt-5.6-terra';
+    const reasoningEffort = envFirst('BLUE_STEEL_OPENAI_REASONING', 'OPENAI_REASONING')
+        ?? 'high';
 
     if (apiKey || baseUrl) {
         return {
@@ -154,6 +156,7 @@ export function tryDeriveUIGroundedClient(): LLMClient | null {
                 model,
                 apiKey,
                 baseUrl: baseUrl ?? 'https://api.openai.com/v1',
+                reasoning: { effort: reasoningEffort },
             },
         };
     }
