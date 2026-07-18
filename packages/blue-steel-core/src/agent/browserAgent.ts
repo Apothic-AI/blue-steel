@@ -150,7 +150,8 @@ export class BrowserAgent extends Agent {
         };
 
         const markdown = serializeToMarkdown(result, markdownOptions);
-        const screenshot = await harness.screenshot();
+        // Use connector path so virtual resize + optional coordinate grid match act() observations
+        const screenshot = await this.require(BrowserConnector).getLastScreenshot();
         const data = await this.models.extract(instructions, schema, screenshot, markdown);
 
         this.browserAgentEvents.emit('extractDone', instructions, data);

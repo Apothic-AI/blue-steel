@@ -99,6 +99,8 @@ template_string TaskInstructions(task: string, taskData: MultiMediaContentPart[]
     Execute the task serially.
 
     Plan out as many actions as possible, but stopping at the point where you will need to observe to plan further.
+
+    Captchas and similar challenges are often animated: subjects can appear, disappear, move, or swap between frames. Each screenshot is only one freeze-frame and may be blank, mid-transition, or missing the real target. If a captcha does not make sense or looks incomplete, do not guess from a single frame — wait briefly and take additional screenshots/observations until the prompt and options are stable and understandable, then act.
 "#
 
 // TODO: connector system instructions

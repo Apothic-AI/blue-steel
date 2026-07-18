@@ -178,6 +178,8 @@ Default profile: `~/.camoufox/profiles/blue-steel` (isolated from other Camoufox
 | `BLUE_STEEL_PROFILE_NAME` | Firefox profile name (default `blue-steel`) |
 | `BLUE_STEEL_HEADLESS` | `1` for headless smoke/CI |
 | `BLUE_STEEL_NARRATE` | Log agent actions to the console |
+| `BLUE_STEEL_COORDINATE_GRID` | `1` to overlay a labeled x/y grid on agent screenshots (observation-only) |
+| `BLUE_STEEL_COORDINATE_GRID_SPACING` | Grid spacing in px when grid is enabled (default `100`) |
 
 ## Skill protocol (highlights)
 
