@@ -1,0 +1,42 @@
+[
+    {
+        "variant": "type",
+        "target": "Email field",
+        "content": "test-user@blue-steel.run"
+    },
+    {
+        "variant": "type",
+        "target": "Password field",
+        "content": "test"
+    },
+    {
+        "variant": "click",
+        "target": "Login button"
+    },
+    {
+        "variant": "click",
+        "target": "Companies section on left sidebar"
+    },
+    {
+        "variant": "click",
+        "target": "Add company button"
+    },
+    {
+        "variant": "type",
+        "target": "Name field",
+        "content": "BlueSteel AI Inc"
+    },
+    {
+        "variant": "type",
+        "target": "Domain field",
+        "content": "https://blue-steel.run"
+    },
+    {
+        "variant": "click",
+        "target": "Save button"
+    },
+    {
+        "variant": "check",
+        "description": "BlueSteel AI Inc appears in the list of companies"
+    }
+]

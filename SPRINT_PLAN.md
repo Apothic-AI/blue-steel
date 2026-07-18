@@ -424,3 +424,36 @@ Record decisions in this file’s appendix as they are made.
 ---
 
 *Generated from inspection of `magnitude/` and `cloverlabs-camoufox` skill sources. Update this plan when open decisions close or sprint exit criteria change.*
+
+---
+
+## 12. Implementation status (staging workspace)
+
+Completed in `blue-steel-staging`:
+
+| Sprint | Status | Notes |
+|--------|--------|-------|
+| 0 Foundations | Done | Monorepo packages, skill shell, NOTICE/README |
+| 1 Controller fork | Done | Coord mouse/keys, base64 screenshot, profile `blue-steel` |
+| 2 TS client + harness | Done | `CamoufoxClient`, `WebHarness`, unit test + live smoke |
+| 3 Core agent port | Done | Playwright removed from core path; BAML retained |
+| 4 Camoufox-native | Done | CF/container actions in webActions + harness |
+| 5 Test/MCP/scaffold | Partial | Packages build; MCP on Camoufox; example template |
+| 6 Docs/harden | Done | skill/SKILL.md, README, smoke, upstream isolation |
+
+### Open decisions resolved
+
+| ID | Resolution |
+|----|------------|
+| Skill path | `skill/` in monorepo + `~/.agents/skills/blue-steel` |
+| Package manager | bun + turbo |
+| Extract | Forked as `blue-steel-extract` |
+| Visualizer | No-op under Camoufox |
+| Headless CI | `--headless` / `BLUE_STEEL_HEADLESS=1` |
+| Bin name | `blue-steel` |
+
+### Verified
+
+- Protocol unit test passes (fake controller)
+- Live headless smoke: example.com navigate → screenshot → click → quit
+- Upstream `cloverlabs-camoufox` has zero `mouse_click` ops (unmodified)

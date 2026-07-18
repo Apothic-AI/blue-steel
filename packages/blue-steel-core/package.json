@@ -1,0 +1,66 @@
+{
+  "name": "blue-steel-core",
+  "version": "0.3.1",
+  "description": "Blue Steel vision browser agent (Camoufox backend)",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "bin": {
+    "blue-steel": "dist/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitnom/blue-steel.git"
+  },
+  "homepage": "https://github.com/bitnom/blue-steel",
+  "bugs": {
+    "url": "https://github.com/bitnom/blue-steel/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "ai",
+    "agent",
+    "testing",
+    "ui-testing",
+    "automation",
+    "blue-steel",
+    "typescript"
+  ],
+  "scripts": {
+    "build": "baml-cli generate && pkgroll",
+    "check": "tsc --noEmit",
+    "cli": "bun ./src/cli.ts",
+    "pubdev": "bun run build && yalc publish --force --push"
+  },
+  "author": {
+    "name": "BlueSteel"
+  },
+  "contributors": [],
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "@types/object-hash": "^3.0.6",
+    "pkgroll": "^2.10.0",
+    "typescript": "~5.7.2"
+  },
+  "dependencies": {
+    "@boundaryml/baml": "^0.202.0",
+    "@paralleldrive/cuid2": "^2.2.2",
+    "ansis": "^4.1.0",
+    "commander": "^13.1.0",
+    "eventemitter3": "^5.0.1",
+    "blue-steel-extract": "workspace:*",
+    "object-hash": "^3.0.0",
+    "pino": "^9.6.0",
+    "pino-pretty": "^13.0.0",
+    "posthog-node": "^5.1.1",
+    "sharp": "^0.33.5",
+    "zod": "^3.24.4",
+    "zod-to-json-schema": "^3.24.5"
+  }
+}

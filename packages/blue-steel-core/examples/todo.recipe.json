@@ -1,0 +1,19 @@
+[
+    {
+        "variant": "type",
+        "target": "the todo input field",
+        "content": "Take out the trash"
+    },
+    {
+        "variant": "check",
+        "description": "Exactly one todo item exists"
+    },
+    {
+        "variant": "click",
+        "target": "The empty circle to the left of the \"Take out the trash\" todo item"
+    },
+    {
+        "variant": "click",
+        "target": "The text that says \"Clear Completed\""
+    }
+]

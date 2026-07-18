@@ -1,0 +1,10 @@
+Blue Steel
+Copyright contributors
+
+This product includes software developed from Magnitude
+(https://github.com/magnitudedev/magnitude), licensed under the Apache License,
+Version 2.0.
+
+The Blue Steel Camoufox skill controller is adapted from patterns in the
+cloverlabs-camoufox agent skill. The upstream skill is not modified; Blue Steel
+maintains its own copy under skill/ and ~/.agents/skills/blue-steel.

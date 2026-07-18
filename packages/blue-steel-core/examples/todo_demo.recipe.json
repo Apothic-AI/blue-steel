@@ -1,0 +1,37 @@
+[
+    {
+      "variant": "type",
+      "target": "Input field with placeholder 'What needs to be done?'",
+      "content": "Take out the trash<enter>"
+    },
+    {
+      "variant": "type",
+      "target": "Input field with placeholder 'What needs to be done?'",
+      "content": "Buy groceries<enter>"
+    },
+    {
+      "variant": "type",
+      "target": "Input field with placeholder 'What needs to be done?'",
+      "content": "Build more test cases with BlueSteel<enter>"
+    },
+    {
+      "variant": "check",
+      "description": "Three todo items are visible in the list"
+    },
+    {
+      "variant": "click",
+      "target": "Checkbox next to 'Take out the trash'"
+    },
+    {
+      "variant": "click",
+      "target": "Checkbox next to 'Buy groceries'"
+    },
+    {
+      "variant": "click",
+      "target": "Checkbox next to 'Build more test cases with BlueSteel'"
+    },
+    {
+      "variant": "check",
+      "description": "Todo list shows 0 items left"
+    }
+]
