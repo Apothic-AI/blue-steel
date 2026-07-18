@@ -13,11 +13,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bitnom/blue-steel.git"
+    "url": "git+https://github.com/Apothic-AI/blue-steel.git"
   },
-  "homepage": "https://github.com/bitnom/blue-steel",
+  "homepage": "https://github.com/Apothic-AI/blue-steel",
   "bugs": {
-    "url": "https://github.com/bitnom/blue-steel/issues"
+    "url": "https://github.com/Apothic-AI/blue-steel/issues"
   },
   "files": [
     "dist"
@@ -38,7 +38,8 @@
     "pubdev": "bun run build && yalc publish --force --push"
   },
   "author": {
-    "name": "BlueSteel"
+    "name": "Apothic AI",
+    "url": "https://github.com/Apothic-AI/blue-steel"
   },
   "contributors": [],
   "license": "Apache-2.0",

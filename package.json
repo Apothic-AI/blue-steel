@@ -1,7 +1,7 @@
 {
   "name": "blue-steel",
   "scripts": {
-    "build": "turbo run build",
+    "build": "bun run --filter blue-steel-extract build && bun run --filter blue-steel-core build && bun run --filter blue-steel-test build && bun run --filter blue-steel-mcp build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -9,7 +9,11 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run build && changeset publish",
-    "postinstall": "echo 'Blue Steel: run bootstrap in skill/ and bun install in packages as needed'"
+    "postinstall": "echo 'Blue Steel: run bootstrap in skill/ and bun install in packages as needed'",
+    "check": "bun run --filter blue-steel-core check",
+    "test": "bun test packages/blue-steel-core/src/web/camoufoxClient.test.ts",
+    "smoke": "BLUE_STEEL_HEADLESS=1 bun packages/blue-steel-core/examples/camoufox_smoke.ts",
+    "bootstrap-skill": "bash skill/scripts/bootstrap.sh && rsync -a --exclude .venv skill/ ~/.agents/skills/blue-steel/"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",
@@ -27,9 +31,18 @@
     "packages/*"
   ],
   "author": {
-    "name": "BlueSteel",
-    "url": "https://github.com/bitnom/blue-steel"
+    "name": "Apothic AI",
+    "url": "https://github.com/Apothic-AI/blue-steel"
   },
   "contributors": [],
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Apothic-AI/blue-steel.git"
+  },
+  "homepage": "https://github.com/Apothic-AI/blue-steel",
+  "bugs": {
+    "url": "https://github.com/Apothic-AI/blue-steel/issues"
+  },
+  "description": "Vision browser agent powered by Camoufox"
 }

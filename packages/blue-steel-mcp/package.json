@@ -24,11 +24,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blue-steeldev/blue-steel.git"
+    "url": "git+https://github.com/Apothic-AI/blue-steel.git"
   },
-  "homepage": "https://github.com/blue-steeldev/blue-steel#readme",
+  "homepage": "https://github.com/Apothic-AI/blue-steel",
   "bugs": {
-    "url": "https://github.com/blue-steeldev/blue-steel/issues"
+    "url": "https://github.com/Apothic-AI/blue-steel/issues"
   },
   "files": [
     "dist"
@@ -48,9 +48,8 @@
     "inspector": "npx @modelcontextprotocol/inspector dist/index.js"
   },
   "author": {
-    "name": "BlueSteel",
-    "email": "founders@blue-steel.run",
-    "url": "https://blue-steel.run"
+    "name": "Apothic AI",
+    "url": "https://github.com/Apothic-AI/blue-steel"
   },
   "contributors": [
     "Anders Lie <anders@blue-steel.run>",

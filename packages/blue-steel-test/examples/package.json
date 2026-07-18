@@ -11,5 +11,6 @@
   },
   "dependencies": {
     "blue-steel-test": "file:.yalc/blue-steel-test"
-  }
+  },
+  "license": "Apache-2.0"
 }

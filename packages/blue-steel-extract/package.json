@@ -39,7 +39,8 @@
     "structured-data"
   ],
   "author": {
-    "name": "BlueSteel"
+    "name": "Apothic AI",
+    "url": "https://github.com/Apothic-AI/blue-steel"
   },
   "license": "MIT",
   "dependencies": {

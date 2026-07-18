@@ -56,3 +56,4 @@ node_modules/
 **/node_modules/
 **/dist/
 .turbo/
+SPRINT_PLAN.md
